@@ -57,29 +57,29 @@ const AnotherCard = (props) => {
         }
     ]
 
-    const [ list, setList] = useState(users);
+    const [ allUser, setallUser] = useState(users);
 
-   const deleteItem = (e) => {
-        console.log('Pressed on delete');
-        let users = e.target.getAttribute("removeCard")
-        setList(list.filter(items => items.id!==users));
+    const deleteItem = (users) => {
+      setallUser(allUser.filter(items => items.id!==users.id));
+      console.log('Pressed on delete', users);
     }
 
   return (
     <>
-        {list.map(users => (
+        {allUser.map(users => (
             <Card variant='outlined' style={{width:320, height:350, marginTop: 10, marginLeft: 10}}>
                 <CardHeader 
                 title='User'
                 subheader='User availability'
                 sx={{ color: 'red'}}
                 action={
-                    <IconButton> 
-                        <Close onClick={deleteItem} removeCard={users.id}/>
+                    <IconButton onClick={() => {deleteItem(users)}} > 
+                        <Close />
                     </IconButton>
                 }></CardHeader>
                 <CardContent>
-                    <Typography variant='h5'>Name : {users.firstName}</Typography>
+                    <Typography variant='h5'>Id : {users.id}</Typography>
+                    <Typography variant='h5'>Name : {users.name}</Typography>
                     <Typography variant='h5'>Password : {users.password} </Typography>
                 </CardContent> 
                 <CardContent>
