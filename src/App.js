@@ -3,7 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button';
-import { useState,useEffect } from 'react';
+import { useState} from 'react';
 
 function App() {
   var user1={
@@ -82,7 +82,8 @@ function App() {
     }
 
 
-  const hendleclick=(updateUser)=>{
+  const hendleclick=(updateUser,e)=>{
+    e.preventDefault()
     if(updateUser.id!==0){
       updateClick(updateUser)
       setUser({id:0,name:"",password:"",days:{monday:false,tuesday:false,wednesday:false}})
@@ -135,7 +136,7 @@ function App() {
           <FormControlLabel control={<Checkbox id='monday' checked={user.days.monday} name='monday' onClick={onCheckMonday}/>} label="Monday" />
           <FormControlLabel control={<Checkbox id='tuesday' checked={user.days.tuesday} name="tuesday" onClick={onCheckTuesday}/>} label="Tuesday" />
           <FormControlLabel control={<Checkbox id='wednesday' checked={user.days.wednesday} name="wednesday"onClick={onCheckWednesday}/>}label="Wednesday" />
-          <Button variant="contained" onClick={()=>{hendleclick(user)}}>Submit</Button>
+          <Button variant="contained" onClick={(e)=>{hendleclick(user,e)}}>Submit</Button>
         </Box>
       </div>
     </div>
