@@ -132,10 +132,9 @@ function App() {
 
 	return (
 		<div className="conatiner">
-			<div className="cards" style={{ display: "flex", flexFlow: "row wrap" }}>
-				<AnotherCard />
-			</div>
-			<h1 style={{ fontSize: "30px", textAlign: "center" }}>App</h1>
+			
+      <h1 style={{ fontSize: "30px", textAlign: "center" }}>App</h1>
+
 			<div style={{ width: "50%", margin: "auto" }}>
 				<Box
 					component="form"
@@ -191,6 +190,11 @@ function App() {
 					</Button>
 				</Box>
 			</div>
+      
+      <div className="cards" style={{ display: "flex", flexFlow: "row wrap" }}>
+				<AnotherCard  allUser={allUser} setAllUser={setAllUser} update={update}/>
+			</div>
+      
 		</div>
 	);
 }
