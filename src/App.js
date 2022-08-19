@@ -3,11 +3,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnotherCard from "./Components/AnotherCard";
+import { useFormik} from "formik";
+import * as Yup from'yup'
+
 
 function App() {
-	var user1 = {
+let users=[ {
 		id: 1,
 		name: "Kushal",
 		password: "123kushal",
@@ -15,9 +18,9 @@ function App() {
 			monday: true,
 			tuesday: false,
 			wednesday: true,
-		},
-	};
-	var user2 = {
+		}
+  },
+    {
 		id: 2,
 		name: "user2",
 		password: "123kushal",
@@ -25,9 +28,9 @@ function App() {
 			monday: true,
 			tuesday: false,
 			wednesday: false,
-		},
-	};
-	var user3 = {
+		}
+  },
+    {
 		id: 3,
 		name: "user3",
 		password: "@user1234",
@@ -35,9 +38,9 @@ function App() {
 			monday: true,
 			tuesday: true,
 			wednesday: true,
-		},
-	};
-	var user4 = {
+		}
+  },
+    {
 		id: 4,
 		name: "kunj",
 		password: "@kunj123",
@@ -45,9 +48,9 @@ function App() {
 			monday: true,
 			tuesday: true,
 			wednesday: false,
-		},
-	};
-	var user5 = {
+		}
+  },
+    {
 		id: 5,
 		name: "Devam",
 		password: "@devam",
@@ -56,22 +59,22 @@ function App() {
 			tuesday: true,
 			wednesday: false,
 		},
-	};
+  }
+] ;
 
-	const [allUser, setAllUser] = useState([user1, user2, user3, user4, user5]);
+	const [allUser, setAllUser] = useState(users);
 	const [user, setUser] = useState({
 		id: 0,
 		name: "",
 		password: "",
 		days: { monday: false, tuesday: false, wednesday: false },
 	});
-	const onChange = (e) => {
-		setUser({ ...user, [e.target.name]: e.target.value });
+
+	const update =(User) => {
+	  setUser(User);
 	};
 
-	const update = (user) => {
-		setUser(user);
-	};
+
 	const updateClick = (user) => {
 		let tempUser = allUser;
 		for (let index = 0; index < tempUser.length; index++) {
@@ -87,52 +90,52 @@ function App() {
 		setAllUser(tempUser);
 	};
 
-	const hendleclick = (updateUser, e) => {
-		e.preventDefault();
-		if (updateUser.id !== 0) {
-			updateClick(updateUser);
-			setUser({
-				id: 0,
-				name: "",
-				password: "",
-				days: { monday: false, tuesday: false, wednesday: false },
-			});
+	const hendleclick = (User,resetForm) => {
+		if (User.id !== 0) {
+			updateClick(User);
+      setUser({
+        id: 0,
+        name: "",
+        password: "",
+        days: { monday: false, tuesday: false, wednesday: false },
+      })
+      resetForm()
 		} else {
-			user.id = Math.random();
-			setAllUser(allUser.concat(user));
-			setUser({
-				id: 0,
-				name: "",
-				password: "",
-				days: { monday: false, tuesday: false, wednesday: false },
-			});
+			User.id = Math.random();
+			setAllUser(allUser.concat(User));
+      setUser({
+        id: 0,
+        name: "",
+        password: "",
+        days: { monday: false, tuesday: false, wednesday: false },
+      })
+      resetForm()
 		}
 	};
-	const onCheckMonday = (e) => {
-		setUser((element) => {
-			const days = { ...element.days };
-			days.monday = e.target.checked;
-			return { ...element, days };
-		});
-	};
-	const onCheckTuesday = (e) => {
-		setUser((element) => {
-			const days = { ...element.days };
-			days.tuesday = e.target.checked;
-			return { ...element, days };
-		});
-	};
-	const onCheckWednesday = (e) => {
-		setUser((element) => {
-			const days = { ...element.days };
-			days.wednesday = e.target.checked;
-			return { ...element, days };
-		});
-	};
+
+  const userValidatioon=Yup.object().shape({
+    name:Yup.string()
+      .min(2,'Too short')
+      .max(50,'Too long')
+      .required('Required'),
+    password:Yup.string()
+      .min(2,'Too short')
+      .max(50,'Too long')
+      .required('Required'),
+  })
+
+  const formik=useFormik({
+    enableReinitialize:true,
+    initialValues:user,
+    onSubmit:(values,{resetForm})=>{
+      hendleclick(values,resetForm)
+    },
+    validationSchema:userValidatioon
+  })
+
 
 	return (
 		<div className="conatiner">
-			
       <h1 style={{ fontSize: "30px", textAlign: "center" }}>App</h1>
 
 			<div style={{ width: "50%", margin: "auto" }}>
@@ -145,28 +148,30 @@ function App() {
 					autoComplete="off">
 					<TextField
 						id="outlined-basic"
-						value={user.name}
+						value={formik.values.name}
 						label="Name"
 						variant="outlined"
 						name="name"
-						onChange={onChange}
+						onChange={formik.handleChange}
 					/>
+          <div>{formik.errors.name}</div>
 					<TextField
 						id="filled-basic"
-						value={user.password}
+						value={formik.values.password}
 						label="Password"
 						variant="filled"
 						name="password"
-						onChange={onChange}
+						onChange={formik.handleChange}
 					/>
+          <div>{formik.errors.password}</div>
 					<strong>Available on:</strong>
 					<FormControlLabel
-						control={<Checkbox id="monday" checked={user.days.monday} name="monday" onClick={onCheckMonday} />}
+						control={<Checkbox id="monday" checked={formik.values.days.monday} name="days.monday" onClick={formik.handleChange} />}
 						label="Monday"
 					/>
 					<FormControlLabel
 						control={
-							<Checkbox id="tuesday" checked={user.days.tuesday} name="tuesday" onClick={onCheckTuesday} />
+							<Checkbox id="tuesday" checked={formik.values.days.tuesday} name="days.tuesday" onClick={formik.handleChange} />
 						}
 						label="Tuesday"
 					/>
@@ -174,18 +179,16 @@ function App() {
 						control={
 							<Checkbox
 								id="wednesday"
-								checked={user.days.wednesday}
-								name="wednesday"
-								onClick={onCheckWednesday}
+								checked={formik.values.days.wednesday}
+								name="days.wednesday"
+								onClick={formik.handleChange}
 							/>
 						}
 						label="Wednesday"
 					/>
 					<Button
 						variant="contained"
-						onClick={(e) => {
-							hendleclick(user, e);
-						}}>
+						onClick={formik.handleSubmit}>
 						Submit
 					</Button>
 				</Box>
