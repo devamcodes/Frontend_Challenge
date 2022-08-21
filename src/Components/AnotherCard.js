@@ -12,10 +12,10 @@ const AnotherCard = (props) => {
   return (
     <>
         {props.allUser.map(users => (
-            <Card variant='outlined' style={{width:325, height:345, marginTop: 10, marginLeft: 10}}>
+            <Card variant='outlined' key={users.id} style={{width:325, height:355, marginTop: 10, marginLeft: 10}}>
                 <CardHeader 
                 title='User'
-                sx={{ color: 'red'}}
+                sx={{ color: 'red', textAlign:'center'}}
                 action={
                     <IconButton onClick={() => {deleteItem(users)}} > 
                         <Close />
@@ -39,7 +39,7 @@ const AnotherCard = (props) => {
                     <i class="fa-solid fa-circle" style={{color:`${users.days.wednesday===true?'green':'red'}`}}/>
                 </CardContent>
                 <CardActions>
-                    <Button color='primary' fullWidth onClick={() => {props.update(users)}}>Update</Button>
+                    <Button color='info' variant='contained' fullWidth onClick={() => {props.update(users)}}>Update</Button>
                 </CardActions>
             </Card>
         ))}
