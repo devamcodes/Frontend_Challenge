@@ -8,11 +8,7 @@ import {useNavigate} from 'react-router-dom'
 
 function Home({allUser,setAllUser}) {
 
-useEffect(()=>{
-    if(!LogInUser){
-        navigate('/login')
-    }
-})
+
 
     const LogInUser=localStorage.getItem('username')
     // localStorage.removeItem('username')
@@ -103,13 +99,14 @@ useEffect(()=>{
 	};
     const handleLogout=()=>{
         localStorage.removeItem('username')
-        navigate('/login')
+        navigate('/')
     }
   return (
     <div>
     <h1 style={{ fontSize: "30px", textAlign: "center",color:'white' }}>Hello <b>{LogInUser}</b><Button
               variant="contained"
               onClick={handleLogout}
+              color='success'
               style={{float:'right' ,marginTop:5,marginRight:5}}
               >	
               LogOut
@@ -119,7 +116,7 @@ useEffect(()=>{
   </div>
 
   <br />
-  <Grid item container xs={10} sm={8} md={6} lg={10} style={{width: "38%", margin: "auto"}}> 
+  <Grid id="form" item container xs={10} sm={8} md={6} lg={10} style={{width: "38%", margin: "auto"}}> 
 
       <Paper id="form"
           elevation={12}

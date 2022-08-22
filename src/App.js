@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Home from "./Components/Home";
-
-import {useRoutes} from 'react-router-dom'
-import  Login  from "./Components/Login";
+import Route from "./Components/Route";
 
 
 function App() {
@@ -64,15 +61,10 @@ function App() {
 	const [allUser, setAllUser] = useState(users);
 	
 	// To make new data card, all initial value is in user
-	let element=useRoutes([{
-		path:'/',
-		element:<Home allUser={allUser} setAllUser={setAllUser}/>
-	},{
-		path:'/login',
-		element:<Login allUser={allUser}/>
-	}
-]);
-	return element;
+	
+	return (
+      <Route allUser={allUser} setAllUser={setAllUser}/>
+  )
 }
 
 export default App;

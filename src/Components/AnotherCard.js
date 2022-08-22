@@ -15,7 +15,7 @@ const AnotherCard = (props) => {
             <Card variant='outlined' key={users.id} style={{width:325, height:345, marginTop: 10, marginLeft: 10}}>
                 <CardHeader 
                 title='User'
-                sx={{ color: 'red'}}
+                sx={{ color: 'red', textAlign:'center'}}
                 action={
                     <IconButton onClick={() => {deleteItem(users)}} > 
                         <Close />
