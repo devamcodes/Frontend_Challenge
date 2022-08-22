@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Home from "./Components/Home";
-import {useRoutes} from 'react-router-dom'
-import  Login  from "./Components/Login";
+import Route from "./Components/Route" 
 
 
 function App() {
@@ -15,6 +13,10 @@ function App() {
 				monday: false,
 				tuesday: false,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -25,6 +27,10 @@ function App() {
 				monday: true,
 				tuesday: false,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -35,6 +41,10 @@ function App() {
 				monday: true,
 				tuesday: false,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -45,6 +55,10 @@ function App() {
 				monday: true,
 				tuesday: true,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -55,6 +69,10 @@ function App() {
 				monday: true,
 				tuesday: true,
 				wednesday: true,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			},
 		},
 		{
@@ -65,32 +83,19 @@ function App() {
 				monday: true,
 				tuesday: true,
 				wednesday: true,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			},
-		},
-		{
-			id: 7,
-			name: "Jethalal",
-			password: "Babita_Jalebi",
-			days: {
-				monday: false,
-				tuesday: false,
-				wednesday: true,
-			},
-		}
+		}	
 	];
 
 	const [allUser, setAllUser] = useState(users);
 	
-	let element=useRoutes([{
-            path:'/',
-            element:<Home allUser={allUser} setAllUser={setAllUser}/>
-        },
-        {
-            path:'/login',
-            element:<Login allUser={allUser}/>
-        }
-    ]);
-	return element;
+	return (
+		<Route allUser={allUser} setAllUser={setAllUser}/>
+	)
 }
 
 export default App;
