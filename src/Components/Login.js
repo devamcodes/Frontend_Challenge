@@ -62,7 +62,7 @@ function Login({allUser}) {
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton  onClick={handleshow}>
-                {Visibility?<Visibility/>:<VisibilityOff/>}
+                {visibility?<Visibility/>:<VisibilityOff/>}
                 </IconButton>
               </InputAdornment>
   } />
