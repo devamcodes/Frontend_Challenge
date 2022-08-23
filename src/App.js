@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Route from "./Components/Route";
+import Route from "./Components/Route" 
 
 
 function App() {
@@ -8,31 +8,43 @@ function App() {
 		{
 			id: 1,
 			name: "Kushal",
-			password: "123kushal",
+			password: "Kushal_123",
 			days: {
-				monday: true,
+				monday: false,
 				tuesday: false,
-				wednesday: true,
+				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
 			id: 2,
-			name: "user2",
-			password: "123kushal",
+			name: "Umang Bhai",
+			password: "Umang_123",
 			days: {
 				monday: true,
 				tuesday: false,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
 			id: 3,
 			name: "user3",
-			password: "@user1234",
+			password: "@user123",
 			days: {
 				monday: true,
-				tuesday: true,
-				wednesday: true,
+				tuesday: false,
+				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -43,6 +55,10 @@ function App() {
 				monday: true,
 				tuesday: true,
 				wednesday: false,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			}
 		},
 		{
@@ -52,19 +68,34 @@ function App() {
 			days: {
 				monday: true,
 				tuesday: true,
-				wednesday: false,
+				wednesday: true,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
 			},
-		}
+		},
+		{
+			id: 6,
+			name: "User 6",
+			password: "@user123",
+			days: {
+				monday: true,
+				tuesday: true,
+				wednesday: true,
+				thursday: false,
+				friday: false,
+				saturday: false,
+				sunday: false
+			},
+		}	
 	];
 
-	// Joint allUser = users   data in an array
 	const [allUser, setAllUser] = useState(users);
 	
-	// To make new data card, all initial value is in user
-	
 	return (
-      <Route allUser={allUser} setAllUser={setAllUser}/>
-  )
+		<Route allUser={allUser} setAllUser={setAllUser}/>
+	)
 }
 
 export default App;

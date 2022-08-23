@@ -1,6 +1,6 @@
-import { Avatar, Button, Grid, Paper, TextField, IconButton, Checkbox, FormControlLabel, InputAdornment,OutlinedInput } from '@mui/material'
-import { LockOutlined, Google } from '@mui/icons-material'
-import { Visibility,VisibilityOff} from '@mui/icons-material'
+import { Avatar, Button, Grid, Paper, TextField, IconButton, Checkbox, FormControlLabel, InputAdornment, OutlinedInput } from '@mui/material'
+import { LockOutlined, Google, Visibility} from '@mui/icons-material'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
@@ -17,17 +17,16 @@ function Login({allUser}) {
   const formik=useFormik({
     initialValues:{name:'',password:""},
     onSubmit:(values,{resetForm})=>{
-
       // eslint-disable-next-line
       allUser.filter((user)=>{
         if(user.name===name && user.password===password){
             localStorage.setItem('username',values.name)
             navigate('/home')
         }
-        return user
-      })
+        return user;
+      });
       if(!localStorage.getItem('username')){
-        alert('Invalid credentials')
+        alert('Invalid credentials');        
       }
       resetForm()
     }
@@ -47,9 +46,8 @@ function Login({allUser}) {
             <h1 style={{textAlign:"center", marginTop:"15px"}}>Enter your credentials to continue</h1>
             
             <Button style={{cursor:"not-allowed", color:"grey", marginTop:"10px"}} fullWidth>
-              
                 <Google />
-              
+
               Sign in with Google
             </Button>
 
@@ -57,16 +55,15 @@ function Login({allUser}) {
            
             <h1 style={{textAlign:"center", marginTop:"15px"}}> Sign in with Username</h1>
             <TextField label="Username" value={name} onChange={formik.handleChange}  name="name"fullWidth style={{marginTop:20}}required/>
-            
-            <OutlinedInput value={password} onChange={formik.handleChange } name="password" fullWidth style={{marginTop:20}}required type={visibility?"text":"password"}  placeholder="Password *"
+
+            <OutlinedInput value={password} onChange={formik.handleChange} name="password" fullWidth required style={{marginTop:20}} type={visibility?"text":"password"}  placeholder="Password *"
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton  onClick={handleshow}>
-                {visibility?<Visibility/>:<VisibilityOff/>}
+                  {visibility?<Visibility/>:<VisibilityOffIcon/>}
                 </IconButton>
               </InputAdornment>
-  } />
-            
+            } />
 
             <Grid style={{display:"flex", flexFlow:"row wrap", justifyContent:"space-between"}}>
               <FormControlLabel 
@@ -78,12 +75,8 @@ function Login({allUser}) {
 
             <Button variant="contained" style={{marginTop:20}} onClick={formik.handleSubmit} type='submit' color='success' fullWidth>Sign In</Button>
         </Paper>
-
     </>
   )
 }
 
-
-
 export default Login
-

@@ -1,18 +1,19 @@
 import React from 'react'
-import { Card, CardActions, CardContent, CardHeader, Typography, Button, IconButton } from '@mui/material'
+import { Card, CardActions, CardContent, CardHeader, Typography, Button, ButtonGroup , IconButton, Grid} from '@mui/material'
 import { Close } from '@mui/icons-material';
 
 const AnotherCard = (props) => {
-    
+    const {logger,allUser,setAllUser}=props
     const deleteItem = (users) => {
-      props.setAllUser(props.allUser.filter(items => items.id!==users.id));
-      console.log('Delete user ', users);
+        logger.Deleted_card_username.push(users.name)
+      setAllUser(allUser.filter(items => items.id!==users.id));
     }
 
   return (
     <>
-        {props.allUser.map(users => (
-            <Card variant='outlined' key={users.id} style={{width:325, height:345, marginTop: 10, marginLeft: 10}}>
+        {allUser.map(users => (
+
+            <Card variant='outlined' key={users.id} style={{width:345, height:355,margin:15}}>
                 <CardHeader 
                 title='User'
                 sx={{ color: 'red', textAlign:'center'}}
@@ -29,17 +30,27 @@ const AnotherCard = (props) => {
                     <Typography variant='h5' sx={{ mb: -3}}>Available On :</Typography>
                 </CardContent>
                 <CardActions sx={{ mb: -3}}>
-                    <Button>Monday </Button>
-                    <Button>Tuesday </Button>
-                    <Button>Wednesday </Button>
+                    <ButtonGroup variant="outlined" style={{marginLeft:"16px"}}>
+                        <Button >M </Button>
+                        <Button >T </Button>
+                        <Button >W </Button>
+                        <Button >T </Button>
+                        <Button >F </Button>
+                        <Button >S </Button>
+                        <Button >S </Button>
+                    </ButtonGroup>                    
                 </CardActions>
-                <CardContent style={{display:'flex', flexFlow:"row wrap", justifyContent:'space-around' }}>
+                <CardContent style={{display:'flex', flexFlow:"row wrap", justifyContent:'space-around', marginTop:'10px' }}>
                     <i className="fa-solid fa-circle" style={{color:`${users.days.monday===true?'green':'red'}`}} />
                     <i className="fa-solid fa-circle" style={{color:`${users.days.tuesday===true?'green':'red'}`}}/>
                     <i className="fa-solid fa-circle" style={{color:`${users.days.wednesday===true?'green':'red'}`}}/>
+                    <i className="fa-solid fa-circle" style={{color:`${users.days.thursday===true?'green':'red'}`}}/>
+                    <i className="fa-solid fa-circle" style={{color:`${users.days.friday===true?'green':'red'}`}}/>
+                    <i className="fa-solid fa-circle" style={{color:`${users.days.saturday===true?'green':'red'}`}}/>
+                    <i className="fa-solid fa-circle" style={{color:`${users.days.sunday===true?'green':'red'}`}}/>
                 </CardContent>
                 <CardActions>
-                    <Button color='primary' href='#form' fullWidth onClick={() => {props.update(users)}}>Update</Button>
+                    <Button color='info' href='#form' variant='contained' fullWidth onClick={() => {props.update(users)}}>Update</Button>
                 </CardActions>
             </Card>
         ))}
