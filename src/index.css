@@ -9,6 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(#5a8356,#3aad6a,#a3d495,#E5EEC1)no-repeat center center/cover;
+  background-attachment: fixed; 
+  
 }
 
 code {
